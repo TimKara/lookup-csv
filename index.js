@@ -28,7 +28,7 @@ function lookupCSV (filePath, keyfields, options = {
   }
 }) {
   // Open a CSV stream of the matching spreadsheet
-  const csvStream = fs.readFileSync(filePath, 'utf8').split(/\r?\n/)
+  const csvStream = fs.readFileSync(filePath, 'utf8').split(new RegExp("^\"(?:[^\"\\n]|(\\n{1,})){0,}\",", "g"))
 
   // Split CSV into array of strings and convert into a json object array
   const csvsplit = csvStream.map(line => line.split(','))
